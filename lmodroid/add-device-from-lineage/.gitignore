@@ -1,0 +1,11 @@
+*.pyc
+.python-version
+__pycache__/
+token
+out.json
+device_deps.json
+working
+scripts
+gerrit-config
+lineage-devices-updater
+los-gerrit-config
