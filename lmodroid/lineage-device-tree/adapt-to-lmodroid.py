@@ -95,7 +95,7 @@ if os.path.exists(args.tree + '/lineage.dependencies'):
         deps = json.load(f)
 
     for dep in deps:
-        if dep['repository'].startswith('android_device_'):
+        if dep['repository'].startswith('android_device_') and "sepolicy" not in dep['repository']:
             dep['repository'] = dep['repository'].replace(
                 'android_device_', 'LMODroid-Devices/device_')
         else:
