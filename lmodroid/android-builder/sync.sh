@@ -14,7 +14,7 @@ if [[ ! -d $ROOTDIR ]]; then
     echo "ROOTDIR: $ROOTDIR not found"
     mkdir -p $ROOTDIR
     cd $ROOTDIR
-    repo init -u https://git.libremobileos.com/LMODroid/manifest.git -b $ROM_VERSION --depth=1
+    repo init -u https://git.libremobileos.com/LMODroid/manifest.git -b $ROM_VERSION -g default,-darwin --depth=1
     mkdir -p .repo/local_manifests
     git clone https://git.libremobileos.com/ninja-turtles/manifest.git -b $ROM_VERSION .repo/turtles_manifest
     git clone ssh://git@git.libremobileos.com:40057/LMODroid-priv/manifest.git -b $ROM_VERSION .repo/lmo_private_manifest
@@ -29,4 +29,4 @@ git -C .repo/turtles_manifest fetch origin
 git -C .repo/turtles_manifest reset --hard origin/$ROM_VERSION
 git -C .repo/lmo_private_manifest fetch origin
 git -C .repo/lmo_private_manifest reset --hard origin/$ROM_VERSION
-repo sync --force-sync -cd -j8 --no-clone-bundle --no-tags
+repo sync --force-sync -c -j8 --no-clone-bundle --no-tags --force-remove-dirty
