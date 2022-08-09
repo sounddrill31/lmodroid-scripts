@@ -17,6 +17,7 @@ DEVICE=$1
 BRANCH_SRC=$2
 BRANCH_DIST=$3
 
+cd ${LOCALDIR}
 if [[ ! -d scripts ]]; then
     git clone https://github.com/LineageOS/scripts.git
 else
