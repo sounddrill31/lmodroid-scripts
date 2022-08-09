@@ -1,15 +1,15 @@
 #!/bin/bash
 
-if [[ -z $DEVICE ]] && [[ ! -z $JOB_NAME ]]; then
-    DEVICE=`echo $JOB_NAME | cut -f 1 -d "-"`
+if [[ -z $DEVICE ]] && [[ ! -z $JOB_BASE_NAME ]]; then
+    DEVICE=`echo $JOB_BASE_NAME | cut -f 1 -d "-"`
 fi
 
-if [[ -z $ROM_VERSION ]] && [[ ! -z $JOB_NAME ]]; then
-    ROM_VERSION=`echo $JOB_NAME | cut -f 2 -d "-"`
+if [[ -z $ROM_VERSION ]] && [[ ! -z $JOB_BASE_NAME ]]; then
+    ROM_VERSION=`echo $JOB_BASE_NAME | cut -f 2 -d "-"`
 fi
 
-if [[ -z $BUILD_TYPE ]] && [[ ! -z $JOB_NAME ]]; then
-    BUILD_TYPE=`echo $JOB_NAME | cut -f 3 -d "-"`
+if [[ -z $BUILD_TYPE ]] && [[ ! -z $JOB_BASE_NAME ]]; then
+    BUILD_TYPE=`echo $JOB_BASE_NAME | cut -f 3 -d "-"`
 fi
 
 if [[ -z $BUILD_DIR ]]; then
