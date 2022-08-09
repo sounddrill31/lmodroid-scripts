@@ -135,3 +135,9 @@ globalFindReplace(args.tree, "lineageos.providers.LineageSettings",
 globalFindReplace(args.tree, "LineageSettings",
                   "Settings", "*.java")
 globalRemoveDuplicateLines(args.tree, "android.provider.Settings;", "*.java")
+
+# LineageOS intents
+globalFindReplace(args.tree, "lineageos.content.Intent.ACTION_INITIALIZE_LINEAGE_HARDWARE",
+                  '"lineageos.intent.action.INITIALIZE_LINEAGE_HARDWARE"', "*.java")
+globalFindReplace(args.tree, "lineageos.content.Intent",
+                  "Intent", "*.java")
