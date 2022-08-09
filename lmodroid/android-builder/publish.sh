@@ -24,7 +24,7 @@ if [[ $? -eq 0 ]]; then
     echo "[+] Upload Recovery to OTA server."
     rsync -avz "--rsh=ssh -o StrictHostKeyChecking=no" \
         $ROOTDIR/out/target/product/$DEVICE/${RECOVERYIMG} \
-        root@192.168.110.75:/root/builds/recovery/{RECOVERY_NAME}
+        root@192.168.110.75:/root/builds/recovery/${RECOVERY_NAME}
 else
     exit 1
 fi
