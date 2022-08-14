@@ -29,13 +29,23 @@ def mergeDirs(scr_path, dir_path):
             os.mkdir(dir_folder)
         mergeDirs(scr_folder, dir_folder)
 
-def globalFindReplace(directory, find, replace, filePattern):
+def globalFindReplace(directory, find, replace, filePattern, exception=None):
     for filepath in glob.iglob(directory + '/**/' + filePattern, recursive=True):
         with open(filepath) as file:
             s = file.read()
-        s = s.replace(find, replace)
-        with open(filepath, "w") as file:
-            file.write(s)
+        completed_lines = []
+        has_change = False
+        for line in s.splitlines(True):
+            if exception is None or exception not in line:
+                if find in line:
+                    has_change = True
+                completed_lines.append(line.replace(find, replace))
+            else:
+                completed_lines.append(line)
+
+        if has_change:
+            with open(filepath, "w") as file:
+                file.writelines(completed_lines)
 
 def globalRemoveDuplicateLines(directory, find, filePattern):
     for filepath in glob.iglob(directory + '/**/' + filePattern, recursive=True):
@@ -51,8 +61,9 @@ def globalRemoveDuplicateLines(directory, find, filePattern):
                     index -= 1
                 found = True
             index += 1
-        with open(filepath, "w") as file:
-            file.writelines(completed_lines)
+        if found:
+            with open(filepath, "w") as file:
+                file.writelines(completed_lines)
 
 # Adapt Lineage overlays
 for (dirpath, dirnames, filenames) in os.walk(args.tree):
@@ -92,7 +103,7 @@ if len(device_mk) > 0:
     new_device_mk_path = os.path.dirname(device_mk[0]) + "/" + new_device_mk
     os.rename(device_mk[0], new_device_mk_path)
 
-globalFindReplace(args.tree, "lineage_", "lmodroid_", "*.mk")
+globalFindReplace(args.tree, "lineage_", "lmodroid_", "*.mk", "defconfig")
 
 # Replace lineage vendor inherits to lmodroid
 globalFindReplace(args.tree, "vendor/lineage", "vendor/lmodroid", "*.mk")
