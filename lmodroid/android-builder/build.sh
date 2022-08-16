@@ -19,6 +19,9 @@ echo '[+] Setup Environment...'
 echo '[+] Breakfast...'
 breakfast lmodroid_${DEVICE}-${BUILD_TYPE}
 
+echo '[+] Patching greybus mk...'
+$LOCALDIR/clean_greybus.sh kernel
+
 echo '[+] Make Cleaning...'
 make installclean -j$(nproc --all)
 rm -rf $ROOTDIR/out/target/product/$DEVICE/*.zip
