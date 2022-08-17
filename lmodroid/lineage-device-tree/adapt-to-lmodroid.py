@@ -97,11 +97,11 @@ for (dirpath, dirnames, filenames) in os.walk(args.tree):
 
 
 # Replace lineage_<codename> to lmodroid_<codename>
-device_mk = glob.glob(args.tree + "/lineage_*.mk")
-if len(device_mk) > 0:
-    new_device_mk = os.path.basename(device_mk[0]).replace("lineage_", "lmodroid_")
-    new_device_mk_path = os.path.dirname(device_mk[0]) + "/" + new_device_mk
-    os.rename(device_mk[0], new_device_mk_path)
+device_mks = glob.glob(args.tree + "/**/lineage_*.mk", recursive=True)
+for device_mk in device_mks:
+    new_device_mk = os.path.basename(device_mk).replace("lineage_", "lmodroid_")
+    new_device_mk_path = os.path.dirname(device_mk) + "/" + new_device_mk
+    os.rename(device_mk, new_device_mk_path)
 
 globalFindReplace(args.tree, "lineage_", "lmodroid_", "*.mk", "defconfig")
 
