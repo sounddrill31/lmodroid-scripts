@@ -29,13 +29,18 @@ def mergeDirs(scr_path, dir_path):
             os.mkdir(dir_folder)
         mergeDirs(scr_folder, dir_folder)
 
-def globalFindReplace(directory, find, replace, filePattern, exception=None):
+def globalFindReplace(directory, find, replace, filePattern, exceptions=[]):
     for filepath in glob.iglob(directory + '/**/' + filePattern, recursive=True):
         with open(filepath) as file:
             s = file.read()
         completed_lines = []
         has_change = False
         for line in s.splitlines(True):
+            exception = None
+            for ex in exceptions:
+                if ex in line:
+                    exception = ex
+                    break
             if exception is None or exception not in line:
                 if find in line:
                     has_change = True
@@ -103,10 +108,10 @@ for device_mk in device_mks:
     new_device_mk_path = os.path.dirname(device_mk) + "/" + new_device_mk
     os.rename(device_mk, new_device_mk_path)
 
-globalFindReplace(args.tree, "lineage_", "lmodroid_", "*.mk", "defconfig")
+globalFindReplace(args.tree, "lineage_", "lmodroid_", "*.mk", ["defconfig", "manifest"])
 
 # Replace lineage vendor inherits to lmodroid
-globalFindReplace(args.tree, "vendor/lineage", "vendor/lmodroid", "*.mk", "defconfig")
+globalFindReplace(args.tree, "vendor/lineage", "vendor/lmodroid", "*.mk", ["defconfig"])
 
 # Fix Doze resources lib
 globalFindReplace(args.tree, "org.lineageos.settings.resources",
