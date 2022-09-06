@@ -34,7 +34,7 @@ except KeyError:
 
 repos = []
 for repo in device_deps[args.device]:
-    if repo.startswith("android_device"):
+    if repo.startswith("android_device") and "sepolicy" not in repo:
         repos.append("LineageOS/" + repo)
 
 new_repos=[]
