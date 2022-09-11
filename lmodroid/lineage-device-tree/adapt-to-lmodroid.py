@@ -75,8 +75,8 @@ for (dirpath, dirnames, filenames) in os.walk(args.tree):
     if 'lineage-sdk' in dirnames:
         # Remove LineageSettingsProvider
         if os.path.exists(dirpath + '/lineage-sdk/packages/LineageSettingsProvider'):
-            shutil.rmtree(
-                dirpath + '/lineage-sdk/packages/LineageSettingsProvider', ignore_errors=True)
+            shutil.move(dirpath + '/lineage-sdk/packages/LineageSettingsProvider',
+                        dirpath + '/lineage-sdk/packages/SettingsProvider')
 
         # Replace lineage-sdk to frameworks/base
         if os.path.exists(dirpath + '/lineage-sdk/lineage'):
