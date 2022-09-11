@@ -93,6 +93,9 @@ for (dirpath, dirnames, filenames) in os.walk(args.tree):
         if 'lineage' in os.path.basename(dirpath):
             new_basename = os.path.basename(
                 dirpath).replace('lineage', 'lmodroid')
+            if os.path.exists(os.path.dirname(dirpath) + '/' + new_basename):
+                shutil.rmtree(os.path.dirname(dirpath) + '/' +
+                              new_basename, ignore_errors=True)
             shutil.move(dirpath, os.path.dirname(dirpath) + '/' + new_basename)
             globalFindReplace(args.tree, os.path.basename(
                 dirpath), os.path.basename(dirpath).replace('lineage', 'lmodroid'), "*.mk")
