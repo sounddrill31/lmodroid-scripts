@@ -111,10 +111,10 @@ for device_mk in device_mks:
     new_device_mk_path = os.path.dirname(device_mk) + "/" + new_device_mk
     os.rename(device_mk, new_device_mk_path)
 
-globalFindReplace(args.tree, "lineage_", "lmodroid_", "*.mk", ["defconfig", "manifest"])
+globalFindReplace(args.tree, "lineage_", "lmodroid_", "*.mk", ["defconfig", "manifest", ".config", "TARGET_KERNEL_CONFIG"])
 
 # Replace lineage vendor inherits to lmodroid
-globalFindReplace(args.tree, "vendor/lineage", "vendor/lmodroid", "*.mk", ["defconfig"])
+globalFindReplace(args.tree, "vendor/lineage", "vendor/lmodroid", "*.mk", ["defconfig", ".config", "TARGET_KERNEL_CONFIG"])
 
 # Fix Doze resources lib
 globalFindReplace(args.tree, "org.lineageos.settings.resources",
