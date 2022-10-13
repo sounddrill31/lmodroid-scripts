@@ -111,7 +111,7 @@ for device_mk in device_mks:
     new_device_mk_path = os.path.dirname(device_mk) + "/" + new_device_mk
     os.rename(device_mk, new_device_mk_path)
 
-globalFindReplace(args.tree, "lineage_", "lmodroid_", "*.mk", ["defconfig", "manifest", ".config", "TARGET_KERNEL_CONFIG"])
+globalFindReplace(args.tree, "lineage_", "lmodroid_", "*.mk", ["defconfig", "manifest", "framework", ".config", "TARGET_KERNEL_CONFIG"])
 
 # Replace lineage vendor inherits to lmodroid
 globalFindReplace(args.tree, "vendor/lineage", "vendor/lmodroid", "*.mk", ["defconfig", ".config", "TARGET_KERNEL_CONFIG"])
