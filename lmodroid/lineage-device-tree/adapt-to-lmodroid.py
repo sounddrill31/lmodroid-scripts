@@ -70,6 +70,37 @@ def globalRemoveDuplicateLines(directory, find, filePattern):
             with open(filepath, "w") as file:
                 file.writelines(completed_lines)
 
+def globalReduceReservedSize(directory, reduce_size=104857600, find="RESERVED_SIZE", filePattern="*.mk", exceptions=[]):
+    for filepath in glob.iglob(directory + '/**/' + filePattern, recursive=True):
+        with open(filepath) as file:
+            s = file.read()
+        completed_lines = []
+        has_change = False
+        for line in s.splitlines(True):
+            exception = None
+            for ex in exceptions:
+                if ex in line:
+                    exception = ex
+                    break
+            if exception is None or exception not in line:
+                if find in line and ":=" in line:
+                    has_change = True
+                    splitted_line = line.split(":=")
+                    old_part_size = splitted_line[1].strip()
+                    new_partition_size = int(old_part_size)
+                    if new_partition_size > (reduce_size * 3):
+                        new_partition_size -= reduce_size
+                    completed_lines.append(
+                        line.replace(old_part_size, str(new_partition_size)))
+                else:
+                    completed_lines.append(line)
+            else:
+                completed_lines.append(line)
+
+        if has_change:
+            with open(filepath, "w") as file:
+                file.writelines(completed_lines)
+
 # Adapt Lineage overlays
 for (dirpath, dirnames, filenames) in os.walk(args.tree):
     if 'lineage-sdk' in dirnames:
@@ -160,3 +191,6 @@ globalFindReplace(args.tree, "lineageos.content.Intent.ACTION_INITIALIZE_LINEAGE
                   '"lineageos.intent.action.INITIALIZE_LINEAGE_HARDWARE"', "*.java")
 globalFindReplace(args.tree, "lineageos.content.Intent",
                   "Intent", "*.java")
+
+# Reduce partition sizes
+globalReduceReservedSize(args.tree)
