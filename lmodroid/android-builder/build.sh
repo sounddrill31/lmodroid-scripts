@@ -22,16 +22,8 @@ breakfast lmodroid_${DEVICE}-${BUILD_TYPE}
 echo '[+] Patching greybus mk...'
 $LOCALDIR/clean_greybus.sh kernel
 
-echo '[+] Make Cleaning...'
-make installclean -j$(nproc --all)
-rm -rf $ROOTDIR/out/target/product/$DEVICE/*.zip
-rm -rf $ROOTDIR/out/target/product/$DEVICE/system
-rm -rf $ROOTDIR/out/target/product/$DEVICE/system_ext
-rm -rf $ROOTDIR/out/target/product/$DEVICE/vendor
-rm -rf $ROOTDIR/out/target/product/$DEVICE/product
-rm -rf $ROOTDIR/out/target/product/$DEVICE/root
-rm -rf $ROOTDIR/out/target/product/$DEVICE/recovery
-rm -rf $ROOTDIR/out/target/product/$DEVICE/obj/PACKAGING/target_files_intermediates/*
+echo '[+] Cleaning...'
+rm -rf $ROOTDIR/out
 
 echo '[+] Making ROM...'
 make bacon -j$(nproc --all)
