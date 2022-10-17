@@ -17,12 +17,12 @@ if [[ $? -eq 0 ]]; then
     fi
 
     echo "[+] Upload ROM to OTA server."
-    rsync -avz "--rsh=ssh -o StrictHostKeyChecking=no" \
+    rsync -avz "--rsh=ssh -p 40048 -o StrictHostKeyChecking=no" \
         ${BUILT_ROM_PATH} \
         root@get.libremobileos.com:/root/builds/full/
 
     echo "[+] Upload Recovery to OTA server."
-    rsync -avz "--rsh=ssh -o StrictHostKeyChecking=no" \
+    rsync -avz "--rsh=ssh -p 40048 -o StrictHostKeyChecking=no" \
         $ROOTDIR/out/target/product/$DEVICE/${RECOVERYIMG} \
         root@get.libremobileos.com:/root/builds/recovery/${RECOVERY_NAME}
 else
