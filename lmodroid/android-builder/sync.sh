@@ -29,4 +29,5 @@ git -C .repo/turtles_manifest fetch origin
 git -C .repo/turtles_manifest reset --hard origin/$ROM_VERSION
 git -C .repo/lmo_private_manifest fetch origin
 git -C .repo/lmo_private_manifest reset --hard origin/$ROM_VERSION
+rm -rf .repo/local_manifests/roomservice.xml
 repo sync --force-sync -c -j8 --no-clone-bundle --no-tags --force-remove-dirty

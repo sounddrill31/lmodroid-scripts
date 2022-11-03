@@ -19,9 +19,6 @@ echo '[+] Setup Environment...'
 echo '[+] Breakfast...'
 breakfast lmodroid_${DEVICE}-${BUILD_TYPE}
 
-echo '[+] Patching greybus mk...'
-$LOCALDIR/clean_greybus.sh kernel
-
 echo '[+] Cleaning...'
 rm -rf $ROOTDIR/out
 
