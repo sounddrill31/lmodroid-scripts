@@ -27,6 +27,13 @@ if [[ $? -eq 0 ]]; then
         fi
     done
 else
+    echo '[+] Cleaning...'
+    rm -rf $ROOTDIR/out
+
     exit 1
 fi
+
+echo '[+] Cleaning...'
+rm -rf $ROOTDIR/out
+
 exit 0
