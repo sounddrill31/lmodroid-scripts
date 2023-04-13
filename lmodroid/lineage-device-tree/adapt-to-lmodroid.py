@@ -70,7 +70,7 @@ def globalRemoveDuplicateLines(directory, find, filePattern):
             with open(filepath, "w") as file:
                 file.writelines(completed_lines)
 
-def globalReduceReservedSize(directory, reduce_size=104857600, find="RESERVED_SIZE", filePattern="*.mk", exceptions=[]):
+def globalReduceReservedSize(directory, reduce_size=104857600, find="RESERVED_SIZE", filePattern="*.mk", exceptions=["$("]):
     for filepath in glob.iglob(directory + '/**/' + filePattern, recursive=True):
         with open(filepath) as file:
             s = file.read()
@@ -85,13 +85,17 @@ def globalReduceReservedSize(directory, reduce_size=104857600, find="RESERVED_SI
             if exception is None or exception not in line:
                 if find in line and ":=" in line:
                     has_change = True
-                    splitted_line = line.split(":=")
-                    old_part_size = splitted_line[1].strip()
-                    new_partition_size = int(old_part_size)
-                    if new_partition_size > (reduce_size * 3):
-                        new_partition_size -= reduce_size
-                    completed_lines.append(
-                        line.replace(old_part_size, str(new_partition_size)))
+                    try:
+                        splitted_line = line.split(":=")
+                        old_part_size = splitted_line[1].strip()
+                        new_partition_size = int(old_part_size)
+                        if new_partition_size > (reduce_size * 3):
+                            new_partition_size -= reduce_size
+                        completed_lines.append(
+                            line.replace(old_part_size, str(new_partition_size)))
+                    except:
+                        completed_lines.append(line)
+                        pass
                 else:
                     completed_lines.append(line)
             else:
