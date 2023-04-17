@@ -182,19 +182,37 @@ globalFindReplace(args.tree, "org.lineageos.platform.internal",
                   "VendorSupport-preference", "*.bp")
 globalFindReplace(args.tree, "org.lineageos.internal.util",
                   "com.libremobileos.support.util", "*.java")
+globalFindReplace(args.tree, "org.lineageos.internal.util",
+                  "com.libremobileos.support.util", "*.kt")
 globalFindReplace(args.tree, "org.lineageos.platform.internal.R",
                   "com.android.internal.R", "*.java")
+globalFindReplace(args.tree, "org.lineageos.platform.internal.R",
+                  "com.android.internal.R", "*.kt")
 globalFindReplace(args.tree, "lineageos.providers.LineageSettings",
                   "android.provider.Settings", "*.java")
+globalFindReplace(args.tree, "lineageos.providers.LineageSettings",
+                  "android.provider.Settings", "*.kt")
 globalFindReplace(args.tree, "LineageSettings",
                   "Settings", "*.java")
+globalFindReplace(args.tree, "LineageSettings",
+                  "Settings", "*.kt")
+globalFindReplace(args.tree, "lineageos.hardware.",
+                  "com.android.internal.libremobileos.hardware.", "*.java")
+globalFindReplace(args.tree, "lineageos.hardware.",
+                  "com.android.internal.libremobileos.hardware.", "*.kt")
+
 globalRemoveDuplicateLines(args.tree, "android.provider.Settings;", "*.java")
+globalRemoveDuplicateLines(args.tree, "import android.provider.Settings", "*.kt")
 
 # LineageOS intents
 globalFindReplace(args.tree, "lineageos.content.Intent.ACTION_INITIALIZE_LINEAGE_HARDWARE",
                   '"lineageos.intent.action.INITIALIZE_LINEAGE_HARDWARE"', "*.java")
+globalFindReplace(args.tree, "lineageos.content.Intent.ACTION_INITIALIZE_LINEAGE_HARDWARE",
+                  '"lineageos.intent.action.INITIALIZE_LINEAGE_HARDWARE"', "*.kt")
 globalFindReplace(args.tree, "lineageos.content.Intent",
                   "Intent", "*.java")
+globalFindReplace(args.tree, "lineageos.content.Intent",
+                  "Intent", "*.kt")
 
 # Reduce partition sizes
 globalReduceReservedSize(args.tree)
