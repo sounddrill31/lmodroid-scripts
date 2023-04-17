@@ -70,7 +70,7 @@ def globalRemoveDuplicateLines(directory, find, filePattern):
             with open(filepath, "w") as file:
                 file.writelines(completed_lines)
 
-def globalReduceReservedSize(directory, reduce_size=104857600, find="RESERVED_SIZE", filePattern="*.mk", exceptions=["$("]):
+def globalReduceReservedSize(directory, reduce_size=184857600, find="RESERVED_SIZE", filePattern="*.mk", exceptions=["$("]):
     for filepath in glob.iglob(directory + '/**/' + filePattern, recursive=True):
         with open(filepath) as file:
             s = file.read()
