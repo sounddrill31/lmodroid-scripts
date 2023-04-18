@@ -81,6 +81,10 @@ globalFindReplace(args.tree, "lineageos.hardware.",
                   "com.android.internal.libremobileos.hardware.", "*.java")
 globalFindReplace(args.tree, "lineageos.hardware.",
                   "com.android.internal.libremobileos.hardware.", "*.kt")
+globalFindReplace(args.tree, "LiveDisplayManager.getInstance(context)",
+                  "context.getSystemService(LiveDisplayManager.java)", "*.java")
+globalFindReplace(args.tree, "LiveDisplayManager.getInstance(context)",
+                  "context.getSystemService(LiveDisplayManager::class.java)", "*.kt")
 
 globalRemoveDuplicateLines(args.tree, "android.provider.Settings;", "*.java")
 globalRemoveDuplicateLines(args.tree, "import android.provider.Settings", "*.kt")
