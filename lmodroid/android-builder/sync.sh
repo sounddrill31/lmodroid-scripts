@@ -24,6 +24,9 @@ else
     cd $ROOTDIR
 fi
 
+echo '[+] Cleaning...'
+rm -rf $ROOTDIR/*
+
 echo '[+] Syncing repos...'
 git -C .repo/turtles_manifest fetch origin
 git -C .repo/turtles_manifest reset --hard origin/$ROM_VERSION
