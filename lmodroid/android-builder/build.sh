@@ -20,7 +20,7 @@ echo '[+] Breakfast...'
 breakfast lmodroid_${DEVICE}-${BUILD_TYPE}
 
 echo '[+] Cleaning...'
-rm -rf $ROOTDIR/out
+rm -rf $ROOTDIR/*
 
 echo '[+] Making ROM...'
 make bacon -j$(nproc --all)
