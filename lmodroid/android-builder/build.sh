@@ -24,3 +24,10 @@ rm -rf $ROOTDIR/*
 
 echo '[+] Making ROM...'
 make bacon -j$(nproc --all)
+
+if [[ ! $? -eq 0 ]]; then
+    echo '[+] Cleaning...'
+    rm -rf $ROOTDIR/*
+    
+    exit 1
+fi
