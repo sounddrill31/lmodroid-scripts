@@ -222,7 +222,7 @@ function merge_one_base {
                     popd >/dev/null
                     return 1
                 fi
-                if ! git -c rerere.enabled=false merge --no-edit FETCH_HEAD -- 2>&1; then
+                if ! git -c rerere.enabled=false -c user.name="LMO GerritBot" -c user.email="gerrit@libremobileos.com" merge --no-edit FETCH_HEAD -- 2>&1; then
                     echo "[$proj_name] Error: Please merge refs one by one, they are conflicting with themselves" 1>&2
                     git merge --abort 2>&1
                     git clean -fd
