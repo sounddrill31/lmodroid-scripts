@@ -45,7 +45,7 @@ git checkout lineage/${branch_src}
 git switch -c ${branch_dist}
 
 # Adapt
-python "${LOCALDIR}/../lineage-device-tree/adapt-to-lmodroid.py" .
+python "${LOCALDIR}/../lineage-device-tree/adapt-to-lmodroid.py" . ${branch_src}
 
 git add -A
 git commit -m "Adapt to LMODroid by device-add script"
