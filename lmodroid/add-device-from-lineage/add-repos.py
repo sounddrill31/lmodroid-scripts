@@ -40,6 +40,8 @@ for repo in device_deps[args.device]:
 new_repos=[]
 for r in repos:
     new_repos.append(r.replace("LineageOS/android_", "LMODroid-Devices/"))
+if full_branch not in updater_devices:
+    updater_devices[full_branch] = {}
 for repo in repos:
     for updater_device in updater_devices[full_branch]:
         if repo in updater_devices[full_branch][updater_device]:
