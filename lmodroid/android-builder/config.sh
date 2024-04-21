@@ -20,6 +20,10 @@ if [[ -z $CCACHE_DIR ]]; then
     export CCACHE_DIR=${JENKINS_HOME}/.ccache
 fi
 
+if [[ $ROM_VERSION = "fourteen" ]]; then
+    export RELEASE_TYPE="-ap1a"
+fi
+
 export ROOTDIR=$BUILD_DIR/$ROM_VERSION
 export LMODROID_BUILDTYPE=RELEASE
 
