@@ -10,7 +10,7 @@ if [[ $? -eq 0 ]]; then
     echo "[+] Built Rom: ${BUILT_ROM_PATH}"
     DATETIME=`echo ${BUILT_ROM_PATH%.zip} | cut -f 3 -d '-'`
     BUILT_IMAGES="boot recovery dtbo vendor_boot super_empty vendor_kernel_boot init_boot vbmeta"
-    TARGETFILES=`find out/target/product/${DEVICE}/obj/PACKAGING/target_files_intermediates/ -maxdepth 1 -type d  | grep target_files-`
+    TARGETFILES=`find out/target/product/${DEVICE}/obj/PACKAGING/target_files_intermediates/ -mindepth 1 -maxdepth 1 -type d`
 
     echo "[+] Upload ROM to OTA server."
     ssh -p 40048 -o StrictHostKeyChecking=no root@get.libremobileos.com mkdir -p /root/builds/full/${DEVICE}/${DATETIME}
