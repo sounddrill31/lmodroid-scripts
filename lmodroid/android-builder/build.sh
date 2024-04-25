@@ -17,7 +17,7 @@ echo '[+] Setup Environment...'
 . build/envsetup.sh
 
 echo '[+] Breakfast...'
-breakfast lmodroid_${DEVICE}-${BUILD_TYPE}
+breakfast ${DEVICE} ${BUILD_TYPE}
 
 echo '[+] Cleaning...'
 rm -rf $ROOTDIR/out
@@ -28,6 +28,6 @@ make bacon -j$(nproc --all)
 if [[ ! $? -eq 0 ]]; then
     echo '[+] Cleaning...'
     rm -rf $ROOTDIR/*
-    
+
     exit 1
 fi
