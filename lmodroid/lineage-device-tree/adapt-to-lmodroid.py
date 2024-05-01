@@ -196,8 +196,9 @@ if os.path.exists(args.tree + '/lineage.dependencies'):
             dep['repository'] = dep['repository'].replace(
                 'android_device_', 'LMODroid-Devices/device_')
         else:
-            dep['remote'] = "lineage"
-                
+            if 'remote' not in dep:
+                dep['remote'] = "lineage"
+
     with open(new_deps_path, 'w') as outfile:
         json.dump(deps, outfile, indent=2, sort_keys=True)
 
