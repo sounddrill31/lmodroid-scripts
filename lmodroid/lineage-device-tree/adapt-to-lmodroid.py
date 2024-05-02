@@ -175,6 +175,8 @@ globalFindReplace(args.tree, "lineage_", "lmodroid_", "*.mk",
 # Replace lineage vendor inherits to lmodroid
 globalFindReplace(args.tree, "vendor/lineage", "vendor/lmodroid", "*.mk", ["defconfig", ".config", "TARGET_KERNEL_CONFIG"])
 
+globalFindReplace(args.tree, "LINEAGE_BUILD", "LMODROID_BUILD", "*.mk")
+
 # Fix Doze resources lib
 globalFindReplace(args.tree, "org.lineageos.settings.resources",
                   "com.libremobileos.settings.resources", "*.mk")
