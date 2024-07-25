@@ -28,3 +28,4 @@ export PATH=${JENKINS_HOME}/bin:$PATH
 export LANG=C
 export LC_ALL=C
 export GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no"
+export KEYS_DIR=vendor/lmodroid-priv/keys

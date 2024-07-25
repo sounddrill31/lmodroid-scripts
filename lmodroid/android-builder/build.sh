@@ -23,7 +23,7 @@ echo '[+] Cleaning...'
 rm -rf $ROOTDIR/out
 
 echo '[+] Making ROM...'
-make bacon -j$(nproc --all)
+make target-files-package otatools -j$(nproc --all)
 
 if [[ ! $? -eq 0 ]]; then
     echo '[+] Cleaning...'
