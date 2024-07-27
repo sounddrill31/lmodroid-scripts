@@ -148,4 +148,4 @@ ota_from_target_files -k ${KEYS_DIR}/releasekey \
     $ROOTDIR/out/target/product/${DEVICE}/${LMODROID_BUILD_NAME}.zip
 
 rm -rf $ROOTDIR/out/target/product/${DEVICE}/${LMODROID_BUILD_NAME}-signed-target_files.zip
-//TODO: Use signed target files images on publish
+#TODO: Use signed target files images on publish
