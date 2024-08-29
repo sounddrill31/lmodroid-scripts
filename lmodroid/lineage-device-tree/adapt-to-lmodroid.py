@@ -176,6 +176,7 @@ globalFindReplace(args.tree, "lineage_", "lmodroid_", "*.mk",
 globalFindReplace(args.tree, "vendor/lineage", "vendor/lmodroid", "*.mk", ["defconfig", ".config", "TARGET_KERNEL_CONFIG"])
 
 globalFindReplace(args.tree, "LINEAGE_BUILD", "LMODROID_BUILD", "*.mk")
+globalFindReplace(args.tree, "WITH_LINEAGE_CHARGER", "WITH_LMODROID_CHARGER", "*.mk")
 
 # Fix Doze resources lib
 globalFindReplace(args.tree, "org.lineageos.settings.resources",
