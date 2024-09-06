@@ -10,18 +10,15 @@ then
     chmod a+rx ${JENKINS_HOME}/bin/repo
 fi
 
-if [[ ! -d $ROOTDIR ]]; then
-    echo "ROOTDIR: $ROOTDIR not found"
-    mkdir -p $ROOTDIR
-    cd $ROOTDIR
-    repo init -u https://git.libremobileos.com/LMODroid/manifest.git -b $ROM_VERSION -g default,-darwin --depth=1 --git-lfs
-    mkdir -p .repo/local_manifests
+mkdir -p $ROOTDIR
+cd $ROOTDIR
+repo init -u https://git.libremobileos.com/LMODroid/manifest.git -b $ROM_VERSION -g default,-darwin,-turtles,turtles_$DEVICE --depth=1 --git-lfs
+if [[ ! -d .repo/turtles_manifest ]] || [[ ! -d .repo/lmo_private_manifest ]]; then
     git clone https://git.libremobileos.com/ninja-turtles/manifest.git -b $ROM_VERSION .repo/turtles_manifest
     git clone ssh://git@git.libremobileos.com:40057/LMODroid-priv/manifest.git -b $ROM_VERSION .repo/lmo_private_manifest
+    mkdir -p .repo/local_manifests
     ln -s ../turtles_manifest/manifest.xml .repo/local_manifests/turtles.xml
     ln -s ../lmo_private_manifest/manifest.xml .repo/local_manifests/private.xml
-else
-    cd $ROOTDIR
 fi
 
 echo '[+] Cleaning...'
