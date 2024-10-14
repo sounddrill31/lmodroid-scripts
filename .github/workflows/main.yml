@@ -1,0 +1,44 @@
+name: Auto Update from Upstream
+
+on:
+  #schedule:
+  #  - cron: '0 0 * * *'  # Runs daily at midnight
+  workflow_dispatch:
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Set Up Git
+        run: |
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
+      
+      - name: Add upstream repository
+        run: |
+          git remote add upstream https://git.libremobileos.com/infrastructure/scripts.git
+          git fetch upstream
+
+      - name: Create new branch
+        run: git switch -c auto-update-branch
+
+      - name: Rebase changes
+        run: git pull --rebase --strategy-option theirs upstream main
+
+      - name: Check for updates
+        run: |
+          COMMIT_DIFF=$(git diff --name-only --cached | wc -l)
+          if [ $COMMIT_DIFF -gt 0 ]; then
+            git commit -m "Update from upstream"
+            git push origin auto-update-branch
+          fi
+          echo "COMMIT_DIFF=$COMMIT_DIFF" >> "$GITHUB_ENV"
